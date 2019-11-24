@@ -7,3 +7,4 @@ class UserConfig(AppConfig):
     # creates a profile automatically right after account is registered
     def ready(self):
         import user.signals
+        user.signals.user_idle()

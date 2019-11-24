@@ -1,18 +1,20 @@
 #!/usr/bin/env bash
 
-#################################################################################
-#
-#   Run this before commiting any code to check for linting errors and formatting
-#
-#################################################################################
-
 # font color
-red=`tput setaf 1`
-green=`tput setaf 2`
-white=`tput sgr0`
+red=$(tput setaf 1)
+green=$(tput setaf 2)
+white=$(tput sgr0)
+
+PYVENV="venv-my-blog"
 
 # function
-echo_finish () {
+
+activate_virtualenv() {
+    echo "🔧 $white Activating virtual environment"
+    source $PYVENV/bin/activate
+}
+
+echo_finish() {
     echo "$green✓$white Finished checking."
 }
 
@@ -31,6 +33,18 @@ lint_check() {
     echo_ok "OK - no linting errors found."
 }
 
-# main
-lint_check
-echo_finish
+main() {
+
+    # if virtualenv is activated, then run lint check
+    if [[ "$VIRTUAL_ENV" != "" ]]; then
+        echo "🔧 $white Virtual environment activated"
+        lint_check
+        echo_finish
+    else
+        activate_virtualenv
+        lint_check
+        echo_finish
+    fi
+}
+
+main
