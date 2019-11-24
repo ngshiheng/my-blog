@@ -30,6 +30,13 @@ source venv-my-blog/bin/activate
 python3 manage.py runserver
 ```
 
+## Docker :whale:
+
+```
+docker-compose build
+docker-compose up
+```
+
 ## Contributing :busts_in_silhouette:
 
 - Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change
